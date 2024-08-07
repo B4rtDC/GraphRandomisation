@@ -1,0 +1,1 @@
+This folder holds the results obtained from generating the random graphs (in a .jld2 file).
