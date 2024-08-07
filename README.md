@@ -74,7 +74,7 @@ There are some additional specific issues that need to be addressed nevertheless
     #import graph_tool.draw # comment this line to resolve the circular importation error.
     [...]
     ```
-2. When running on a Mac, networkit can have some issues with segmentation faults.
+2. When running on a Mac, networkit can have some issues with segmentation faults, independent of this code (see also its issue list).
 
 ## Running the experiments
 Essentially, you can run the file `experiments.sh`. This will do the following for the different models:
@@ -82,6 +82,10 @@ Essentially, you can run the file `experiments.sh`. This will do the following f
 2. Compute a set of relevant metrics.
 3. Generate the plots and store them in the `plots` folder.
 
-If you want to go more into detail 
+If you want to go more into detail, you can have a look in the different folders:
+- `src` contains all the random graph generation and supporting functions
+- `experiments` contains the code to run the experiments and generate the figures
+- `plots` will contain the generated figures
+- `results` will contain the generated data (graphs + metrics as a dataframe)
 
 
