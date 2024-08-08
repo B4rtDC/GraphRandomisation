@@ -1,0 +1,76 @@
+Sexual escorts network, part of the Koblenz Network Collection
+===========================================================================
+
+This directory contains the TSV and related files of the escorts network: This is the bipartite network of sex buyers and their escorts. Nodes are buyers and escorts. An edge denotes sexual intercourse between a male sex-buyer and a female escort. Edges are weighted with the rating of the escort given by the buyer. Three ratings are possible: bad (−1), neutral (0), good (+1).
+
+
+More information about the network is provided here: 
+http://konect.cc/networks/escorts
+
+Files: 
+    meta.escorts -- Metadata about the network 
+    out.escorts -- The adjacency matrix of the network in whitespace-separated values format, with one edge per line
+      The meaning of the columns in out.escorts are: 
+        First column: ID of from node 
+        Second column: ID of to node
+        Third column (if present): weight or multiplicity of edge
+        Fourth column (if present):  timestamp of edges Unix time
+        Third column: edge weight
+        Fourth column: timestamp of the edge
+
+
+Use the following References for citation:
+
+@MISC{konect:2017:escorts,
+    title = {Sexual escorts network dataset -- {KONECT}},
+    month = oct,
+    year = {2017},
+    url = {http://konect.cc/networks/escorts}
+}
+
+@article{konect:Rocha2010,
+	title = {Information Dynamics Shape the Sexual Networks of {Internet}-mediated Prostitution},
+	author = {Rocha, Luis E. C. and Liljeros, Fredrik and Holme, Petter},
+	journal = {Proc. Natl. Acad. Sci. U.S.A.},
+	number = {13},
+	pages = {5706--5711},
+	volume = {107},
+	year = {2010},
+}
+
+@article{konect:Rocha2010,
+	title = {Information Dynamics Shape the Sexual Networks of {Internet}-mediated Prostitution},
+	author = {Rocha, Luis E. C. and Liljeros, Fredrik and Holme, Petter},
+	journal = {Proc. Natl. Acad. Sci. U.S.A.},
+	number = {13},
+	pages = {5706--5711},
+	volume = {107},
+	year = {2010},
+}
+
+
+@inproceedings{konect,
+	title = {{KONECT} -- {The} {Koblenz} {Network} {Collection}},
+	author = {Jérôme Kunegis},
+	year = {2013},
+	booktitle = {Proc. Int. Conf. on World Wide Web Companion},
+	pages = {1343--1350},
+	url = {http://dl.acm.org/citation.cfm?id=2488173},
+	url_presentation = {https://www.slideshare.net/kunegis/presentationwow},
+	url_web = {http://konect.cc/},
+	url_citations = {https://scholar.google.com/scholar?cites=7174338004474749050},
+}
+
+@inproceedings{konect,
+	title = {{KONECT} -- {The} {Koblenz} {Network} {Collection}},
+	author = {Jérôme Kunegis},
+	year = {2013},
+	booktitle = {Proc. Int. Conf. on World Wide Web Companion},
+	pages = {1343--1350},
+	url = {http://dl.acm.org/citation.cfm?id=2488173},
+	url_presentation = {https://www.slideshare.net/kunegis/presentationwow},
+	url_web = {http://konect.cc/},
+	url_citations = {https://scholar.google.com/scholar?cites=7174338004474749050},
+}
+
+

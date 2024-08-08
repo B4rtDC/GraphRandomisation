@@ -1,0 +1,1 @@
+This folder hold raw network data used for some of the experiments.
