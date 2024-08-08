@@ -244,7 +244,7 @@ module DirectedSimpleGraphs
 
     MaxEntropyGraphs_DBCM(G::SimpleDiGraph, N::Int; kwargs...) = MaxEntropyGraphs_DBCM(Graphs.indegree(G), Graphs.outdegree(G), N; kwargs...)
 
-    function NEMtropy_DBCM(G::SimpleDiGraph, N::Int; netname::String, kwargs...)
+    function NEMtropy_DBCM(G::SimpleDiGraph, N::Int; netname::String, conda_env_name::String="graphrandomisation", kwargs...)
         # get degree sequences and write them to a file
         d_in = Graphs.indegree(G)
         d_out = Graphs.outdegree(G)
@@ -274,16 +274,21 @@ module DirectedSimpleGraphs
         m = nem.DirectedGraph(degree_sequence=d)
         m.solve_tool(model="dcm_exp", method="fixed-point", initial_guess="degrees_minor")
         # generate the samples
-        m.ensemble_sampler($(N), output_dir=OUT_FOLDER)
+        m.ensemble_sampler($(N), output_dir=OUT_FOLDER, cpu_n=1) # reduced to single cpu due to starmap issues
         
         """
 
+        # write out the graph
         open("./sample/directed_$(netname).py", "w") do file
             write(file, content)
         end
 
-        # run the python script
-        #run(`/Users/bartdeclerck/miniconda3/envs/maxentropygraphsbis/bin/python ./sample/directed_$(netname).py`)
+        # run the python script (using conda env)
+        # - list all conda envs
+        candidates = split(read(`conda env list`, String), '\n')
+        # find the one matching
+        myenvpath = split(candidates[findfirst(occursin.(conda_env_name, candidates))])[end]
+        run(`$(myenvpath)/bin/python ./sample/directed_$(netname).py`)
 
         # Load up the NEMtropy graphs from disk
         GG = Vector{SimpleDiGraph}()
@@ -375,7 +380,7 @@ module DirectedSimpleGraphs
                 }
 
                 // open an output file for each iteration with a unique name
-                char fname[150];
+                char fname[500];
                 sprintf(fname, \"$(joinpath(temp_folder,"graph_%d_$(method).txt"))\", i);
                 FILE *file = fopen(fname, "w");
 
@@ -527,7 +532,7 @@ module DirectedSimpleGraphs
                 }
 
                 // open an output file for each iteration with a unique name
-                char fname[150];
+                char fname[500];
                 sprintf(fname, \"$(joinpath(temp_folder,"graph_%d_static_fitness_game.txt"))\", i);
                 FILE *file = fopen(fname, "w");
 
@@ -744,6 +749,7 @@ module DirectedSimpleGraphs
     export
         networkx_directed_configuration_model,
         MaxEntropyGraphs_DBCM,
+        NEMtropy_DBCM,
         igraph_directed_configuration_model,
         networkit_directed_curveball,
         networkit_directed_edge_switching_markov_chain,

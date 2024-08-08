@@ -161,7 +161,7 @@ module BipartiteGraphs
     This is much faster than invoking the NEMtropy package through PyCall in Julia.
     We then load up the samples from disk and return them in the JuliaGraphs format.
     """
-    function NEMtropy_BiCM(G::Graphs.SimpleGraph, N::Int; netname::String, kwargs...)
+    function NEMtropy_BiCM(G::Graphs.SimpleGraph, N::Int; netname::String, conda_env_name::String="graphrandomisation", kwargs...)
         # establish membership
         membership = bipartite_map(G)
         a_members = findall(membership .== 1)
@@ -213,9 +213,18 @@ module BipartiteGraphs
 
 
         """
+
+        # write out the graph
         open("./sample/bipartite_$(netname).py", "w") do file
             write(file, content)
         end
+
+        # run the python script (using conda env)
+        # - list all conda envs
+        candidates = split(read(`conda env list`, String), '\n')
+        # find the one matching
+        myenvpath = split(candidates[findfirst(occursin.(conda_env_name, candidates))])[end]
+        run(`$(myenvpath)/bin/python ./sample/bipartite_$(netname).py`)
 
         # Generate the samples from the generated python script (can take some time...) - deactivate if already done
         run(`/Users/bartdeclerck/miniconda3/envs/maxentropygraphsbis/bin/python ./sample/bipartite_$(netname).py`)

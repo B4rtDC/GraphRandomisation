@@ -24,6 +24,9 @@ begin
 
     # number of samples per randomisation method/algorithm
     const N_samples = 10
+
+    # conda environment name (required for running the python scripts properly, using hte right environment)
+    CONDA_ENV_NAME = "graphrandomisation"
     
     nothing 
 end
