@@ -23,7 +23,7 @@ The setup.sh script takes care of most of the installation. In a nutshell, it do
 3. install additional Julia packages required
 
 There are some additional specific issues that need to be addressed nevertheless, notably:
-1. There is a circular import issue in graph_tool. You will probably get the an error similar to the one shown below:
+1. There can be a circular import issue in graph_tool. You will probably get the an error similar to the one shown below:
     ```sh
     ImportError("cannot import name 'minimize_blockmodel_dl' from partially initialized module 'graph_tool.inference' (most likely due to a circular import) (CONDAPATH/graphrandomisation/lib/python3.11/site-packages/graph_tool/inference/__init__.py)")
     File "JULIAPATH/.julia/packages/PyCall/1gn3u/src/pyeval.jl", line 5, in <module>
